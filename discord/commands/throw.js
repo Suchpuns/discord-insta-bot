@@ -7,6 +7,8 @@ const run = async () => {
 
   await bot.loginInsta().then(() => console.log("LOGGED INTO INSTAGRAM"));
 
+  await bot.sendMessage().then(() => console.log("MESSAGE HAS BEEN SENT"));
+
   await bot.closeBrowser().then(() => console.log("BROWSER CLOSED"));
 };
 

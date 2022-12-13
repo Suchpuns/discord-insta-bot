@@ -1,13 +1,9 @@
 {
     "base_url": "https://www.instagram.com",
     "settings": {
-      "run_every_x_hours": 3,
-      "like_ratio": 0.75,
-      "unfollow_after_days": 2,
-      "headless": true
+      "headless": false
     },
     "selectors": {
-      "home_to_login_button": ".izU2O a",
       "username_field": "input[type=\"text\"]",
       "password_field": "input[type=\"password\"]",
       "login_button": "button[type=\"submit\"]",
@@ -20,6 +16,12 @@
       "user_unfollow_button": "span.vBF20 > button._5f5mN",
       "user_unfollow_confirm_button": "div.mt3GC > button.aOOlW.-Cab_",
       "not_now_button": ".HoLwm",
-      "hash_tags_base_class": ".EZdmt"
+      "hash_tags_base_class": ".EZdmt",
+      "search_user": "input[name=\"queryBox\"]",
+      "select_user": "div._abm4",
+      "check_user": "div._aacl._aaco._aacu._aad0._aad6",
+      "message_next": "div._aagz",
+      "message_field": "textarea[placeholder=\"Message...\"]",
+      "message_send_btn": "button._acan._acao._acas._aj1-"
     }
   }
