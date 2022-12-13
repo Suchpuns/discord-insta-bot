@@ -1,0 +1,53 @@
+class InstaBot {
+  constructor() {
+    const dotenv = require("dotenv");
+    dotenv.config();
+    this.username = process.env.BOT_USERNAME;
+    this.password = process.env.BOT_PASSWORD;
+    console.log(process.env);
+    this.config = require("./config.json");
+  }
+
+  getUrl(endpoint) {
+    return `https://www.instagram.com${endpoint}`;
+  }
+
+  async randWait() {
+    const milliSecs = Math.floor(Math.random() * 1500 + 1000);
+    return new Promise((resolve) => {
+      setTimeout(resolve, milliSecs);
+    });
+  }
+
+  async initPuppeter() {
+    const puppeteer = require("puppeteer");
+    this.browser = await puppeteer.launch({
+      headless: this.config.settings.headless,
+      args: ["--no-sandbox"],
+    });
+    this.page = await this.browser.newPage();
+    this.page.setViewport({ width: 1500, height: 764 });
+  }
+
+  async loginInsta() {
+    await this.page.goto(this.config.base_url, { timeout: 60000 });
+    await this.randWait();
+    // Enter login details
+    let element = await this.page.waitForSelector(
+      this.config.selectors.username_field
+    );
+    await this.page.click(this.config.selectors.username_field);
+    console.log(this.username);
+    await this.page.keyboard.type(this.username);
+    await this.page.click(this.config.selectors.password_field);
+    await this.page.keyboard.type(this.password);
+    await this.page.click(this.config.selectors.login_button);
+    await this.page.waitForNavigation();
+  }
+
+  async closeBrowser() {
+    await this.browser.close();
+  }
+}
+
+module.exports = InstaBot;
