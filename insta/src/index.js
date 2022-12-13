@@ -48,11 +48,13 @@ class InstaBot {
   async sendMessage(message) {
     await this.page.goto(this.getUrl("/direct/new/?hl=en"), { timeout: 30000 });
     await this.randWait();
-    await this.page.waitForSelector(
-      this.config.selectors.not_now_button
-    );
-    await this.page.click(this.config.selectors.not_now_button);
-    await this.randWait();
+    if (this.config.settings.headless === false) {
+      await this.page.waitForSelector(
+        this.config.selectors.not_now_button
+      );
+      await this.page.click(this.config.selectors.not_now_button);
+      await this.randWait();
+    }
     // Enter kobe's dm
     let element = await this.page.waitForSelector(
       this.config.selectors.search_user
