@@ -45,7 +45,7 @@ class InstaBot {
     await this.page.waitForNavigation();
   }
 
-  async sendMessage() {
+  async sendMessage(message) {
     await this.page.goto(this.getUrl("/direct/new/?hl=en"), { timeout: 30000 });
     await this.randWait();
     await this.page.waitForSelector(
@@ -62,10 +62,9 @@ class InstaBot {
     await this.randWait();
 
     element = await this.page.waitForSelector(
-      this.config.selectors.wait_user
+      this.config.selectors.select_user
     );
     await this.page.click(this.config.selectors.select_user);
-
     await this.randWait();
 
     // Check if we had selected the correct user.
@@ -87,7 +86,7 @@ class InstaBot {
     // Type and send message
     await this.page.waitForSelector(this.config.selectors.message_field);
     await this.page.click(this.config.selectors.message_field);
-    await this.page.keyboard.type("HI KOBE");
+    await this.page.keyboard.type(message);
     await this.randWait();
     await this.page.keyboard.press("Enter");
     await this.randWait();
